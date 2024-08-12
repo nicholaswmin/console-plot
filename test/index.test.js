@@ -7,8 +7,8 @@ test('#console.plot() ', async t => {
 
   t.before(() => {
     const arrays = {
-      foo: [1,2,3,4,3,4,3,4,5,6,7,9,15],
-      bar: [2,3,4,6,3,4,7,8,9,10,9]
+      foo: [1,2,4,4,5,5,4,3,6,7,8,12,16,14,14,13,13,12,13,13,14,14,14,15],
+      bar: [1,3,5,5,7,12,12,12,12,10,8,12,10,10,9,10,9,10,12,12,15,12,12]
     }
       
     const logFn = console.log
@@ -20,8 +20,8 @@ test('#console.plot() ', async t => {
     console.plot(arrays, {
       title: 'timeline',
       subtitle: 'Durations, in millis',  
-      height: Math.ceil(process.stdout.rows / 3) || 20,
-      width: 10
+      height: 15,
+      width: 75
     })
   })
 
@@ -50,7 +50,9 @@ test('#console.plot() ', async t => {
     })
     
     await t.test('plots last "n" items, set by width', async t => {
-      t.assert.ok(logs.join().includes('last: 10'), 'cant find "last: 10"')
+      t.assert.ok(
+        logs.join().includes('plotted: 24 out of 75'), 
+        'cant find "plotted: 24 out of 75"')
     })
     
     await t.test('plots the min, according to set width', async t => {
