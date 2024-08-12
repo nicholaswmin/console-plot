@@ -1,5 +1,5 @@
 {
-  "name": "console-plot",
+  "name": "@nicholaswmin/console-plot",
   "version": "0.1.0",
   "type": "module",
   "description": "a CLI plotter",
