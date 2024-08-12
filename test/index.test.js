@@ -1,0 +1,64 @@
+import test from 'node:test'
+
+import console from '../index.js'
+
+test('#console.plot() ', async t => {
+  const logs = []
+
+  t.before(() => {
+    const arrays = {
+      foo: [1,2,3,4,3,4,3,4,5,6,7,9,15],
+      bar: [2,3,4,6,3,4,7,8,9,10,9]
+    }
+      
+    const logFn = console.log
+    console.log = (...args) => {
+      logs.push(...args)
+      logFn(...args)
+    }
+    
+    console.plot(arrays, {
+      title: 'timeline',
+      subtitle: 'Durations, in millis',  
+      height: Math.ceil(process.stdout.rows / 3) || 20,
+      width: 10
+    })
+  })
+
+  await t.test('plots the properties', async t => {
+    await t.test('plots foo', async t => {
+      t.assert.ok(logs.join().includes('foo'))
+    })
+    
+    await t.test('plots bar', async t => {
+      t.assert.ok(logs.join().includes('bar'))
+    })
+    
+    await t.test('plots the title', async t => {
+      t.assert.ok(logs.join().includes('timeline'))
+    })
+
+    await t.test('plots the subtitle', async t => {
+      t.assert.ok(logs.join().includes('Durations'))
+    })
+    
+    await t.test('has a reaonable height', async t => {
+      const height = logs.join().split('\n').length
+
+      t.assert.ok(height > 15, 'height is: < 15') 
+      t.assert.ok(height < 50, 'height is: > 50') 
+    })
+    
+    await t.test('plots last "n" items, set by width', async t => {
+      t.assert.ok(logs.join().includes('last: 10'), 'cant find "last: 10"')
+    })
+    
+    await t.test('plots the min, according to set width', async t => {
+      t.assert.ok(logs.join().includes('3.00'))
+    })
+
+    await t.test('plots the max', async t => {
+      t.assert.ok(logs.join().includes('15.00'))
+    })
+  })
+})
