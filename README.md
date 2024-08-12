@@ -28,7 +28,7 @@ logs:
 
 ```js
 
-timeline
+sensor readings timeline
 
 -- foo  -- bar
 
@@ -49,7 +49,7 @@ timeline
  2.20 ┤│                                                                                                   
  1.00 ┼╯                                                                                                   
 
-Durations, in millis
+Location: Okinawa, Japan
 
 - last: 100 items
 ```
