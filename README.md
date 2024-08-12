@@ -17,10 +17,10 @@ const arrays = {
 }
 
 console.plot(arrays, {
-  title: 'timeline',
-  subtitle: 'Durations, in millis',
-  height: Math.ceil(process.stdout.rows / 3) || 20,
-  width: Math.ceil(process.stdout.columns / 2) || 100
+  title: 'sensor readings timeline',
+  subtitle: 'Location: Okinawa, Japan',
+  height: 15,
+  width: 120
 })
 ```
 
