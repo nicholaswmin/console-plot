@@ -13,7 +13,7 @@ const plot = (obj, {
   subtitle   = '' 
 }) => {
   if (!obj)
-    throw TypeError('"object" is undefined')
+    return console.log('no data ...')
   
   const config  = { subtitle, height, padding: '       ' }  
   const padding = ' '.repeat(config.padding.length - 5)
