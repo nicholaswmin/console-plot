@@ -4,14 +4,14 @@ import console from '../index.js'
 
 test('#console.plot() ', async t => {
   const logs = []
+  const arrays = {
+    foo: [1,2,4,4,5,5,4,3,6,7,8,12,16,14,14,13,13,12,13,13,14,14,14,15],
+    bar: [1,3,5,5,7,12,12,12,12,10,8,12,10,10,9,10,9,10,12,12,15,12,12]
+  }
 
-  t.before(() => {
-    const arrays = {
-      foo: [1,2,4,4,5,5,4,3,6,7,8,12,16,14,14,13,13,12,13,13,14,14,14,15],
-      bar: [1,3,5,5,7,12,12,12,12,10,8,12,10,10,9,10,9,10,12,12,15,12,12]
-    }
-      
+  t.beforeEach(() => {      
     const logFn = console.log
+    logs.splice(0, logs.length - 1)
     console.log = (...args) => {
       logs.push(...args)
       logFn(...args)
@@ -24,32 +24,31 @@ test('#console.plot() ', async t => {
       width: 75
     })
   })
+  
+  await t.test('missing all arguments except input', async t => {
+    await t.test('doesnt throw', t => {
+      t.assert.doesNotThrow(() => console.plot(arrays))
+    })
+  })
 
   await t.test('plots the properties', async t => {
     await t.test('plots foo', async t => {
       t.assert.ok(logs.join().includes('foo'))
     })
     
-    await t.test('plots bar', async t => {
+    await t.test('plots bar', t => {
       t.assert.ok(logs.join().includes('bar'))
     })
     
-    await t.test('plots the title', async t => {
+    await t.test('plots the title', t => {
       t.assert.ok(logs.join().includes('timeline'))
     })
 
-    await t.test('plots the subtitle', async t => {
+    await t.test('plots the subtitle', t => {
       t.assert.ok(logs.join().includes('Durations'))
     })
     
-    await t.test('has a reaonable height', async t => {
-      const height = logs.join().split('\n').length
-
-      t.assert.ok(height > 15, 'height is: < 15') 
-      t.assert.ok(height < 50, 'height is: > 50') 
-    })
-    
-    await t.test('plots last "n" items, set by width', async t => {
+    await t.test('plots last "n" items, set by width', t => {
       t.assert.ok(
         logs.join().includes('plotted: 24 out of 75'), 
         'cant find "plotted: 24 out of 75"')

@@ -11,7 +11,7 @@ const plot = (obj, {
   width      = (Math.ceil(process.stdout.columns / 2) || 100), 
   title      = '', 
   subtitle   = '' 
-}) => {
+} = {}) => {
   if (!obj)
     return console.log('no data ...')
   
