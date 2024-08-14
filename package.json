@@ -1,6 +1,6 @@
 {
   "name": "@nicholaswmin/console-plot",
-  "version": "0.1.2",
+  "version": "0.1.21",
   "type": "module",
   "description": "a CLI plotter",
   "main": "index.js",

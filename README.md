@@ -6,6 +6,12 @@ ASCII-terminal plotter
 
 > wraps [asciichart][asciichart]
 
+## Install 
+
+```bash 
+npm i --save @nicholaswmin/console-plot
+```
+
 ## Usage 
 
 ```js
